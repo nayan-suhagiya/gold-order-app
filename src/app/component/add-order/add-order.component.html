@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12 border bo rounded">
       <div class="border bo rounded mx-4 my-4">
-        <form #orderForm="ngForm" (ngSubmit)="orderSubmit()">
+        <form #orderForm="ngForm" (ngSubmit)="orderSubmit()" autocomplete="off">
           <div>
             <h3>Add New Order :</h3>
             <hr />
@@ -16,8 +16,16 @@
                 id="jtype"
                 placeholder="Jewellery Type"
                 name="jtype"
+                #jtype="ngModel"
                 [(ngModel)]="oData.jtype"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="jtype.invalid && jtype.touched"
+              >
+                Jtype must be required !
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label for="price"><b>Price : </b></label>
@@ -27,8 +35,17 @@
                 id="price"
                 placeholder="Enter Price"
                 name="price"
+                min="0"
+                #price="ngModel"
                 [(ngModel)]="oData.price"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="price.invalid && price.touched"
+              >
+                Price must be required !
+              </div>
             </div>
           </div>
           <div class="form-row">
@@ -40,8 +57,17 @@
                 id="quantity"
                 placeholder="Enter Quantity"
                 name="quantity"
+                min="0"
+                #quantity="ngModel"
                 [(ngModel)]="oData.quantity"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="quantity.invalid && quantity.touched"
+              >
+                Quantity must be required !
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label for="weight"><b>Weight : </b></label>
@@ -49,10 +75,18 @@
                 type="text"
                 class="form-control"
                 id="weight"
-                placeholder="Enter Weight"
+                placeholder=".00gm 0.0kg etc"
                 name="weight"
+                #weight="ngModel"
                 [(ngModel)]="oData.weight"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="weight.invalid && weight.touched"
+              >
+                Weight is not valid !
+              </div>
             </div>
           </div>
 
@@ -65,8 +99,16 @@
                 id="cname"
                 placeholder="Enter Customer Name"
                 name="cname"
+                #cname="ngModel"
                 [(ngModel)]="oData.cname"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="cname.invalid && cname.touched"
+              >
+                Customer name must be required !
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label for="mobile"><b>Customer Mobile : </b></label>
@@ -76,8 +118,17 @@
                 id="mobile"
                 placeholder="Enter mobile number"
                 name="cmobile"
+                pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
+                #cmobile="ngModel"
                 [(ngModel)]="oData.cmobile"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="cmobile.invalid && cmobile.touched"
+              >
+                Customer mobile number is not valid !
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -88,8 +139,16 @@
               id="caddress"
               placeholder="123,street,area name,pincode"
               name="caddress"
+              #caddress="ngModel"
               [(ngModel)]="oData.caddress"
+              required
             />
+            <div
+              class="alert alert-warning my-2 text-danger"
+              *ngIf="caddress.invalid && caddress.touched"
+            >
+              Customer address number is not valid !
+            </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -100,8 +159,16 @@
                 id="city"
                 placeholder="Enter City"
                 name="city"
+                #city="ngModel"
                 [(ngModel)]="oData.city"
+                required
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="city.invalid && city.touched"
+              >
+                City is not valid !
+              </div>
             </div>
             <div class="form-group col-md-6">
               <label for="status"><b>Select Order Status : </b></label>
@@ -109,16 +176,28 @@
                 id="status"
                 name="status"
                 [(ngModel)]="oData.status"
+                required
+                #status="ngModel"
                 class="form-control"
               >
                 <option value="pending">Pending</option>
                 <option value="confirmed">Confirmed</option>
                 <option value="delivered">Delivered</option>
               </select>
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="status.invalid && status.touched"
+              >
+                Status must be valid !
+              </div>
             </div>
           </div>
           <div class="form-group text-center">
-            <button type="submit" class="btn btn-success col-sm-3 mx-2">
+            <button
+              type="submit"
+              [disabled]="orderForm.invalid"
+              class="btn btn-success col-sm-3 mx-2"
+            >
               Add
             </button>
             <button type="reset" class="btn btn-danger col-sm-3 mx-2">
