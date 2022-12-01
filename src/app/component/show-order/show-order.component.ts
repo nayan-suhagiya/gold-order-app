@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/interface/data';
 import { Component, OnInit } from '@angular/core';
@@ -22,7 +23,10 @@ export class ShowOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.orderData = this.dataOperationService.getData();
+    this.dataOperationService.getData().subscribe((res) => {
+      // console.log(res);
+      this.orderData = res;
+    });
     // console.log(this.orderData);
 
     this.singleOrder = this.formBuilder.group({
