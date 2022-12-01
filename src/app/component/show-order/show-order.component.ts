@@ -29,6 +29,7 @@ export class ShowOrderComponent implements OnInit {
     });
     // console.log(this.orderData);
 
+    //for update data to localstorage
     this.singleOrder = this.formBuilder.group({
       jtype: [''],
       price: [''],
@@ -43,6 +44,7 @@ export class ShowOrderComponent implements OnInit {
   }
 
   edit(data: Data, i: number) {
+    //for the localstorage change data
     this.singleOrder.controls['jtype'].setValue(data.jtype);
     this.singleOrder.controls['price'].setValue(data.price);
     this.singleOrder.controls['quantity'].setValue(data.quantity);
@@ -57,6 +59,7 @@ export class ShowOrderComponent implements OnInit {
   }
 
   update() {
+    //updata function works on localstorage data
     this.singleOrderObj.jtype = this.singleOrder.value.jtype;
     this.singleOrderObj.price = this.singleOrder.value.price;
     this.singleOrderObj.quantity = this.singleOrder.value.quantity;
