@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { AddOrderComponent } from './component/add-order/add-order.component';
 import { ShowOrderComponent } from './component/show-order/show-order.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, AddOrderComponent, ShowOrderComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

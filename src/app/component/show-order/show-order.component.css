@@ -1,0 +1,12 @@
+td i {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+hr {
+  margin: 1rem 0;
+  color: #198754;
+  border: 0;
+  border-top: 3px solid;
+  opacity: 0.5;
+}
