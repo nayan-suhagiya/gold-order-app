@@ -21,6 +21,7 @@ export class AddOrderComponent implements OnInit {
 
   orderSubmit() {
     // console.log(this.form.value);
+    // console.log(this.form.value.oid);
     this.dataOperationService.saveData(this.form.value);
     this.form.reset();
   }

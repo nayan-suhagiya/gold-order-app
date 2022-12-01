@@ -1,4 +1,5 @@
 export class Data {
+  oid: number = Math.floor(Math.random() * 100000);
   jtype!: string;
   price!: number;
   quantity!: number;

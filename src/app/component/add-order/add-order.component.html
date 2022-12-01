@@ -191,6 +191,19 @@
                 Status must be valid !
               </div>
             </div>
+            <div class="form-group">
+              <label for="oid"><b>Order ID : </b></label>
+              <input
+                readonly
+                type="text"
+                class="form-control"
+                id="oid"
+                placeholder="{{ oData.oid }}"
+                name="oid"
+                [(ngModel)]="oData.oid"
+                required
+              />
+            </div>
           </div>
           <div class="form-group text-center">
             <button

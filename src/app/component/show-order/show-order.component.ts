@@ -40,6 +40,7 @@ export class ShowOrderComponent implements OnInit {
       caddress: [''],
       city: [''],
       status: [''],
+      oid: [''],
     });
   }
 
@@ -54,6 +55,7 @@ export class ShowOrderComponent implements OnInit {
     this.singleOrder.controls['caddress'].setValue(data.caddress);
     this.singleOrder.controls['city'].setValue(data.city);
     this.singleOrder.controls['status'].setValue(data.status);
+    this.singleOrder.controls['oid'].setValue(data.oid);
     this.singleOrderIndex = i;
     // console.log(this.singleOrder);
   }
@@ -68,14 +70,34 @@ export class ShowOrderComponent implements OnInit {
     this.singleOrderObj.cmobile = this.singleOrder.value.cmobile;
     this.singleOrderObj.caddress = this.singleOrder.value.caddress;
     this.singleOrderObj.city = this.singleOrder.value.city;
+    this.singleOrderObj.oid = this.singleOrder.value.oid;
     this.singleOrderObj.status = this.singleOrder.value.status;
+    /*
     this.dataOperationService.updateData(
       this.singleOrderObj,
-      this.singleOrderIndex
+      this.singleOrderObj.oid
     );
     this.ngOnInit();
     this.router.navigate(['']);
     Swal.fire('Success!', 'Order Updated Successfully!', 'success');
     // console.log(this.singleOrderObj);
+    */
+
+    const data = {
+      jtype: this.singleOrderObj.jtype,
+      price: this.singleOrderObj.price,
+      quantity: this.singleOrderObj.quantity,
+      weight: this.singleOrderObj.weight,
+      cname: this.singleOrderObj.cname,
+      cmobile: this.singleOrderObj.cmobile,
+      caddress: this.singleOrderObj.caddress,
+      city: this.singleOrderObj.city,
+      oid: this.singleOrderObj.oid,
+      status: this.singleOrderObj.status,
+    };
+
+    if (this.singleOrderObj.oid) {
+      this.dataOperationService.updateData(data, this.singleOrderObj.oid);
+    }
   }
 }
