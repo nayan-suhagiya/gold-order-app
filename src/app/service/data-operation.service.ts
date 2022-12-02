@@ -69,6 +69,6 @@ export class DataOperationService {
 
     this.dataDoc = this.db.doc(`data/${id}`);
     this.dataDoc.update(data);
-    console.log('updated');
+    // console.log('updated');
   }
 }
