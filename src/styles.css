@@ -5,3 +5,41 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+
+.container {
+  margin-top: 19vh;
+}
+
+hr {
+  margin: 1rem 0;
+  color: #198754;
+  border: 0;
+  border-top: 3px solid;
+  opacity: 0.5;
+}
+
+.contain {
+  /* max-width: 600px; */
+  display: flex;
+  justify-content: center;
+}
+
+.contain-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dont-ac {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+span small a {
+  cursor: pointer;
+  padding: 5px 0px;
+}
