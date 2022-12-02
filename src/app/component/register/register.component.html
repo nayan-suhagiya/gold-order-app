@@ -8,31 +8,68 @@
           </div>
         </div>
         <div class="contain-form">
-          <form style="max-width: 650px">
+          <form
+            style="max-width: 650px"
+            #registerData="ngForm"
+            (ngSubmit)="registerSubmit()"
+          >
             <hr />
             <div class="form-group">
               <input
                 type="email"
                 class="form-control"
                 placeholder="Enter your email"
+                name="email"
+                [(ngModel)]="register.email"
+                #email="ngModel"
               />
+              <div
+                class="alert alert-danger"
+                *ngIf="email.invalid && email.touched"
+              >
+                Email not valid!
+              </div>
             </div>
             <div class="form-group">
               <input
                 type="password"
                 class="form-control"
                 placeholder="Enter password"
+                name="passwd"
+                [(ngModel)]="register.passwd"
+                #passwd="ngModel"
               />
+              <div
+                class="alert alert-danger"
+                *ngIf="passwd.invalid && passwd.touched"
+              >
+                Password not valid!
+              </div>
             </div>
             <div class="form-group">
               <input
                 type="password"
                 class="form-control"
                 placeholder="Confirm password"
+                name="confirmpasswd"
+                [(ngModel)]="register.confirmpasswd"
+                #confirmpasswd="ngModel"
               />
+              <div
+                class="alert alert-danger my-1"
+                *ngIf="confirmpasswd.invalid && confirmpasswd.touched"
+              >
+                Password does not mathced!
+              </div>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-success">Register</button>
+              <button
+                type="submit"
+                class="btn btn-success"
+                [disabled]="registerData.invalid"
+              >
+                Register
+              </button>
               <button type="reset" class="btn btn-danger ml-2">Cancle</button>
             </div>
           </form>
