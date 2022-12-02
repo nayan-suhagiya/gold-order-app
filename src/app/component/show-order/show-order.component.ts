@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataOperationService } from 'src/app/service/data-operation.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-show-order',
@@ -19,13 +20,16 @@ export class ShowOrderComponent implements OnInit {
   constructor(
     private dataOperationService: DataOperationService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.dataOperationService.getData().subscribe((res) => {
       // console.log(res);
       this.orderData = res;
+      this.spinner.hide();
     });
     // console.log(this.orderData);
 

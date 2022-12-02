@@ -12,6 +12,8 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, AddOrderComponent, ShowOrderComponent],
@@ -25,7 +27,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     AngularFireModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
+  exports: [NgxSpinnerModule],
   providers: [],
   bootstrap: [AppComponent],
 })
