@@ -13,24 +13,24 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class DataOperationService {
-  private dbPath = '/demo';
   dataRef: AngularFirestoreCollection<any>;
   dataDoc: AngularFirestoreDocument<Data>;
   orders: Observable<any[]>;
 
   constructor(private router: Router, private db: AngularFirestore) {
-    // this.dataRef = db.collection(this.dbPath);
     this.dataRef = this.db.collection('data', (ref) =>
       ref.orderBy('cname', 'asc')
     );
 
-    // this.orders = this.dataRef.snapshotChanges().map((changes) => {
-    //   return changes.map((a) => {
-    //     const data = a.payload.doc.data() as Data;
-    //     data.oid = a.payload.doc.id;
-    //     return data;
-    //   });
-    // });
+    this.orders = this.dataRef.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((a) => {
+          const data = a.payload.doc.data() as Data;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );
   }
   saveData(data: Data) {
     /*
@@ -53,13 +53,9 @@ export class DataOperationService {
 
   getData() {
     // return JSON.parse(localStorage.getItem('orderData'));
-
-    return this.db.collection('data').valueChanges();
+    return this.orders;
   }
 
-  // editData(data: Data) {
-  //   return data;
-  // }
   updateData(data: Data, id) {
     // let orderData = JSON.parse(localStorage.getItem('orderData'));
     // if (index != -1) {
@@ -69,8 +65,10 @@ export class DataOperationService {
     //   Swal.fire('Error!', 'Order not updated!', 'error');
     // }
     // localStorage.setItem('orderData', JSON.stringify(orderData));
+    // .collection("data").where("oid", "==", 0)
 
-    this.dataDoc = this.db.doc(`data/${data.oid}`);
+    this.dataDoc = this.db.doc(`data/${id}`);
     this.dataDoc.update(data);
+    console.log('updated');
   }
 }
