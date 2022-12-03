@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { firebaseConfig } from './firebase.config';
 import { Component, OnInit } from '@angular/core';
@@ -11,10 +12,18 @@ import { initializeApp } from 'firebase/app';
 export class AppComponent implements OnInit {
   title = 'gold';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     initializeApp(firebaseConfig);
     this.router.navigate(['/login']);
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
+
+  logOut() {
+    this.authService.logOut();
   }
 }
