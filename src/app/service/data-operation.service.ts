@@ -77,6 +77,20 @@ export class DataOperationService {
     this.dataDoc = this.db.doc(`data/${id}`);
     this.dataDoc.delete();
     // console.log('deleted');
-    Swal.fire('Success!', 'Order deleted successfully!', 'success');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Your order will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Success!', 'Order deleted successfully!', 'success');
+      } else if (result.isDismissed) {
+        Swal.fire('Eror!', 'Order not deleted!', 'error');
+      }
+    });
   }
 }
