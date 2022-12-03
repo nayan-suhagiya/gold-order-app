@@ -12,6 +12,7 @@
             style="max-width: 650px"
             #loginData="ngForm"
             (ngSubmit)="loginSubmit()"
+            autocomplete="off"
           >
             <hr />
             <div class="form-group">
@@ -20,8 +21,17 @@
                 class="form-control"
                 placeholder="Enter your email"
                 name="email"
+                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                 [(ngModel)]="login.email"
+                required
+                #email="ngModel"
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="email.invalid && email.touched"
+              >
+                Email not valid!
+              </div>
             </div>
             <div class="form-group">
               <input
@@ -29,11 +39,26 @@
                 class="form-control"
                 placeholder="Enter password"
                 name="passwd"
+                pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                 [(ngModel)]="login.passwd"
+                required
+                #passwd="ngModel"
               />
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="passwd.invalid && passwd.touched"
+              >
+                Password not valid!
+              </div>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-success">Login</button>
+              <button
+                type="submit"
+                [disabled]="loginData.invalid"
+                class="btn btn-success"
+              >
+                Login
+              </button>
               <button type="reset" class="btn btn-danger ml-2">Cancle</button>
             </div>
             <div class="dont-ac text-center shadow-sm" routerLink="/register">
@@ -75,3 +100,12 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner
+  type="square-jelly-box"
+  bdColor="rgb(230, 230, 218)"
+  size="medium"
+  color="rgb(25, 135, 82)"
+>
+  <p class="mt-4 text-success">Loading...</p>
+</ngx-spinner>
