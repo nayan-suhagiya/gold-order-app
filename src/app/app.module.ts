@@ -16,9 +16,17 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 @NgModule({
-  declarations: [AppComponent, AddOrderComponent, ShowOrderComponent, LoginComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    AddOrderComponent,
+    ShowOrderComponent,
+    LoginComponent,
+    RegisterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +39,8 @@ import { RegisterComponent } from './component/register/register.component';
     AngularFireModule.initializeApp(environment.firebase),
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    AngularFireAuthModule,
+    provideAuth(() => getAuth()),
   ],
   exports: [NgxSpinnerModule],
   providers: [],

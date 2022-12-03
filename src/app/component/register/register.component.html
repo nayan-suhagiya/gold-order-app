@@ -12,6 +12,7 @@
             style="max-width: 650px"
             #registerData="ngForm"
             (ngSubmit)="registerSubmit()"
+            autocomplete="off"
           >
             <hr />
             <div class="form-group">
@@ -20,11 +21,13 @@
                 class="form-control"
                 placeholder="Enter your email"
                 name="email"
+                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                 [(ngModel)]="register.email"
                 #email="ngModel"
+                required
               />
               <div
-                class="alert alert-danger"
+                class="alert alert-warning my-2 text-danger"
                 *ngIf="email.invalid && email.touched"
               >
                 Email not valid!
@@ -36,31 +39,30 @@
                 class="form-control"
                 placeholder="Enter password"
                 name="passwd"
+                pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                 [(ngModel)]="register.passwd"
                 #passwd="ngModel"
+                required
               />
               <div
-                class="alert alert-danger"
+                class="alert alert-warning my-2 text-danger"
                 *ngIf="passwd.invalid && passwd.touched"
               >
-                Password not valid!
+                Password must be six characters including one uppercase letter,
+                one special character and alphanumeric characters
               </div>
             </div>
             <div class="form-group">
               <input
-                type="password"
+                type="text"
                 class="form-control"
                 placeholder="Confirm password"
                 name="confirmpasswd"
-                [(ngModel)]="register.confirmpasswd"
-                #confirmpasswd="ngModel"
+                [(ngModel)]="register.passwd"
+                readonly
+                required
+                value="{{ register.passwd }}"
               />
-              <div
-                class="alert alert-danger my-1"
-                *ngIf="confirmpasswd.invalid && confirmpasswd.touched"
-              >
-                Password does not mathced!
-              </div>
             </div>
             <div class="form-group">
               <button
@@ -78,3 +80,12 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner
+  type="square-jelly-box"
+  bdColor="rgb(230, 230, 218)"
+  size="medium"
+  color="rgb(25, 135, 82)"
+>
+  <p class="mt-4 text-success">Loading...</p>
+</ngx-spinner>
