@@ -12,6 +12,7 @@
             <th>Total</th>
             <th>Status</th>
             <th>Edit Order</th>
+            <th>Delete Order</th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +50,9 @@
                 data-target="#exampleModalLong"
                 (click)="edit(data, i)"
               ></i>
+            </td>
+            <td>
+              <i class="fa-solid fa-trash" (click)="delete(data, data.id)"></i>
             </td>
           </tr>
         </tbody>

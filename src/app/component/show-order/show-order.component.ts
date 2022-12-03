@@ -106,4 +106,9 @@ export class ShowOrderComponent implements OnInit {
       Swal.fire('Success!', 'Order Updated Successfully!', 'success');
     }
   }
+
+  delete(data: Data, id: string) {
+    // console.log(id);
+    this.dataOperationService.deleteData(data, id);
+  }
 }

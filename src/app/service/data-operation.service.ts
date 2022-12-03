@@ -71,4 +71,12 @@ export class DataOperationService {
     this.dataDoc.update(data);
     // console.log('updated');
   }
+
+  deleteData(data: Data, id: string) {
+    // console.log(data);
+    this.dataDoc = this.db.doc(`data/${id}`);
+    this.dataDoc.delete();
+    // console.log('deleted');
+    Swal.fire('Success!', 'Order deleted successfully!', 'success');
+  }
 }
