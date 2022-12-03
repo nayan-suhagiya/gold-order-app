@@ -1,6 +1,7 @@
-// import { firebaseConfig } from './firebase.config';
+import { Router } from '@angular/router';
+import { firebaseConfig } from './firebase.config';
 import { Component, OnInit } from '@angular/core';
-// import { initializeApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'gold';
 
+  constructor(private router: Router) {}
+
   ngOnInit() {
-    // initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
+    this.router.navigate(['/login']);
   }
 }

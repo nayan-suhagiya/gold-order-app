@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class AuthService {
+  isLoggedIn: boolean = false;
+
   constructor(private spinner: NgxSpinnerService, private router: Router) {}
 
   loginSubmit(data: loginData) {
@@ -21,12 +23,15 @@ export class AuthService {
       .then((userCredential) => {
         // const user = userCredential.user;
         // console.log('Logged in');
+        this.isLoggedIn = true;
         this.spinner.hide();
         Swal.fire('Success!', 'User LoggedIn SuccessFully!', 'success');
       })
       .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
+        this.isLoggedIn = false;
+        this.spinner.hide();
         Swal.fire('Error!', 'Email And Password Not Matched!', 'error');
       });
   }
@@ -39,14 +44,17 @@ export class AuthService {
       .then((userCredential) => {
         // const user = userCredential.user;
         // console.log('User added');
+        this.isLoggedIn = true;
         this.spinner.hide();
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
         Swal.fire('Success!', 'User Added SuccessFully!', 'success');
       })
       .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
         // console.log('error');
+        this.isLoggedIn = false;
+        this.spinner.hide();
         Swal.fire('Error!', 'Please Provide Valid Information!', 'error');
       });
   }
