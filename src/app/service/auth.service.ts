@@ -22,7 +22,8 @@ export class AuthService {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, data.email, data.passwd)
       .then((userCredential) => {
-        // const user = userCredential.user;
+        const user = userCredential.user;
+        console.log(user.email);
         // console.log('Logged in');
         this.router.navigate(['']);
         this.isLoggedIn = true;
@@ -34,7 +35,11 @@ export class AuthService {
         // const errorMessage = error.message;
         this.isLoggedIn = false;
         this.spinner.hide();
-        Swal.fire('Error!', 'Email And Password Not Matched!', 'error');
+        Swal.fire(
+          'Error!',
+          'Email And Password Not Matched! OR User Not Found!',
+          'error'
+        );
       });
   }
 

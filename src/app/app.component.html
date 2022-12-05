@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-success">
   <div class="container-fluid">
-    <a class="navbar-brand ml-4" routerLink="">Gold-Order-App</a>
+    <a class="navbar-brand ml-4">Gold-Order-App</a>
     <button
       class="navbar-toggler mr-4 border-0 btn-nav"
       type="button"
@@ -13,37 +13,36 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="">Home</a>
-        </li>
-        <ng-container *ngIf="!isLoggedIn()">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/register">Register</a>
-          </li>
-        </ng-container>
-        <ng-container *ngIf="isLoggedIn()">
-          <li class="nav-item">
-            <a class="nav-link" (click)="logOut()" style="cursor: pointer"
-              >Logout</a
-            >
-          </li>
-        </ng-container>
-      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center"></ul>
       <form class="d-flex justify-content-center">
-        <!-- <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        /> -->
-        <button class="btn btn-danger" type="button" routerLink="/add-order">
-          Add Order
-        </button>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center set-ul">
+          <ng-container *ngIf="isLoggedIn()">
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="">Home</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="!isLoggedIn()">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/register">Register</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="isLoggedIn()">
+            <li class="nav-item">
+              <a class="nav-link" (click)="logOut()" style="cursor: pointer"
+                >Logout</a
+              >
+            </li>
+          </ng-container>
+        </ul>
+        <ng-container *ngIf="isLoggedIn()">
+          <button class="btn btn-danger" type="button" routerLink="/add-order">
+            Add Order
+          </button>
+        </ng-container>
       </form>
     </div>
   </div>

@@ -22,7 +22,7 @@
             <td>{{ data.price }}</td>
             <td>{{ data.weight }}</td>
             <td>{{ data.quantity }}</td>
-            <td>{{ data.price * data.quantity }}</td>
+            <td>{{ data.price * data.quantity | currency : "INR" }}</td>
             <td>
               <button
                 *ngIf="data.status == 'pending'"
