@@ -60,6 +60,18 @@
     </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4
+        class="text-danger text-center mt-3"
+        *ngIf="orderData == null || orderData == ''"
+      >
+        No Order Found! Click on "add order" to add a new order!
+      </h4>
+    </div>
+  </div>
+</div>
 
 <!-- Button trigger modal -->
 <!-- <button

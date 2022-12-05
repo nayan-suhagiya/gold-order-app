@@ -74,8 +74,6 @@ export class DataOperationService {
 
   deleteData(data: Data, id: string) {
     // console.log(data);
-    this.dataDoc = this.db.doc(`data/${id}`);
-    this.dataDoc.delete();
     // console.log('deleted');
 
     Swal.fire({
@@ -87,6 +85,8 @@ export class DataOperationService {
       cancelButtonText: 'No, keep it',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.dataDoc = this.db.doc(`data/${id}`);
+        this.dataDoc.delete();
         Swal.fire('Success!', 'Order deleted successfully!', 'success');
       } else if (result.isDismissed) {
         Swal.fire('Eror!', 'Order not deleted!', 'error');
