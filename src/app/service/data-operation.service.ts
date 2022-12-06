@@ -24,11 +24,16 @@ export class DataOperationService {
 
     this.orders = this.dataRef.snapshotChanges().pipe(
       map((changes) => {
-        return changes.map((a) => {
-          const data = a.payload.doc.data() as Data;
-          data.id = a.payload.doc.id;
-          return data;
-        });
+        return changes.map(
+          (a) => {
+            const data = a.payload.doc.data() as Data;
+            data.id = a.payload.doc.id;
+            return data;
+          },
+          (err) => {
+            Swal.fire('Error!', 'Network Error!', 'error');
+          }
+        );
       })
     );
   }

@@ -119,10 +119,6 @@ export class ShowOrderComponent implements OnInit {
     const wb: excel.WorkBook = excel.utils.book_new();
     excel.utils.book_append_sheet(wb, ws, 'OrderDetails');
 
-    if (excel.writeFile(wb, 'OrderDetails.xlsx')) {
-      Swal.fire('Success!', 'Excel file downloaded!', 'success');
-    } else {
-      Swal.fire('Error!', 'Some Error Occurs!', 'error');
-    }
+    excel.writeFile(wb, 'OrdersDetails.xlsx');
   }
 }

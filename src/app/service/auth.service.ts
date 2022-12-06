@@ -23,8 +23,9 @@ export class AuthService {
     signInWithEmailAndPassword(auth, data.email, data.passwd)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user.email);
+        // console.log(user.email);
         // console.log('Logged in');
+        localStorage.setItem('LoggedInEmail', user.email);
         this.router.navigate(['']);
         this.isLoggedIn = true;
         this.spinner.hide();
@@ -73,6 +74,7 @@ export class AuthService {
         Swal.fire('Success!', 'Logout SuccessFully!', 'success');
         this.isLoggedIn = false;
         this.router.navigate(['/login']);
+        localStorage.removeItem('LoggedInEmail');
       })
       .catch((error) => {
         this.isLoggedIn = true;
