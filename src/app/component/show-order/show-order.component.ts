@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataOperationService } from 'src/app/service/data-operation.service';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as excel from 'xlsx';
 
 @Component({
   selector: 'app-show-order',
@@ -110,5 +111,18 @@ export class ShowOrderComponent implements OnInit {
   delete(data: Data, id: string) {
     // console.log(id);
     this.dataOperationService.deleteData(data, id);
+  }
+
+  exportToExcel(): void {
+    const ws: excel.WorkSheet = excel.utils.json_to_sheet(this.orderData);
+
+    const wb: excel.WorkBook = excel.utils.book_new();
+    excel.utils.book_append_sheet(wb, ws, 'OrderDetails');
+
+    if (excel.writeFile(wb, 'OrderDetails.xlsx')) {
+      Swal.fire('Success!', 'Excel file downloaded!', 'success');
+    } else {
+      Swal.fire('Error!', 'Some Error Occurs!', 'error');
+    }
   }
 }
