@@ -19,4 +19,8 @@ export class LoginComponent implements OnInit {
     this.authService.loginSubmit(this.loginForm.value);
     this.loginForm.reset();
   }
+
+  signInWithGoogle() {
+    this.authService.googleSignIn();
+  }
 }

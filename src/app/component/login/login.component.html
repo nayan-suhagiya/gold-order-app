@@ -39,18 +39,17 @@
                 class="form-control"
                 placeholder="Enter password"
                 name="passwd"
-                pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                 [(ngModel)]="login.passwd"
                 required
                 #passwd="ngModel"
               />
-              <div
+              <!-- <div
                 class="alert alert-warning my-2 text-danger"
                 *ngIf="passwd.invalid && passwd.touched"
               >
                 Password must be six characters including one uppercase letter,
                 one special character and alphanumeric characters.
-              </div>
+              </div> -->
             </div>
             <div class="form-group">
               <button
@@ -62,7 +61,10 @@
               </button>
               <button type="reset" class="btn btn-danger ml-2">Cancle</button>
             </div>
-            <div class="dont-ac text-center shadow-sm" routerLink="/register">
+            <div
+              class="dont-ac text-center shadow-sm"
+              (click)="signInWithGoogle()"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -88,7 +90,7 @@
                   d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
                 ></path>
               </svg>
-              Register with google
+              Continue with google
             </div>
             <span
               ><small class="float-end"

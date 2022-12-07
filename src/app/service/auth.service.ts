@@ -2,11 +2,16 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { loginData } from '../interface/login';
 import { registerData } from '../interface/register';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { signOut } from 'firebase/auth';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -54,7 +59,7 @@ export class AuthService {
         // console.log('User added');
         this.isLoggedIn = true;
         this.spinner.hide();
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
         Swal.fire('Success!', 'User Added SuccessFully!', 'success');
       })
       .catch((error) => {
@@ -75,10 +80,40 @@ export class AuthService {
         this.isLoggedIn = false;
         this.router.navigate(['/login']);
         localStorage.removeItem('LoggedInEmail');
+        localStorage.removeItem('google token');
       })
       .catch((error) => {
         this.isLoggedIn = true;
         Swal.fire('Error!', 'Some Error Occurs!', 'error');
+      });
+  }
+
+  //Sign in with gogle
+  googleSignIn() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        this.isLoggedIn = true;
+        this.router.navigate(['']);
+        localStorage.setItem('google token', JSON.stringify(result.user.email));
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.warn(errorCode, errorMessage);
+        // ...
       });
   }
 }
