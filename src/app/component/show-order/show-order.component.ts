@@ -18,6 +18,7 @@ export class ShowOrderComponent implements OnInit {
   singleOrder: FormGroup;
   singleOrderObj: Data = new Data();
   singleOrderIndex: number;
+  searchText: string;
   constructor(
     private dataOperationService: DataOperationService,
     private formBuilder: FormBuilder,
@@ -120,5 +121,17 @@ export class ShowOrderComponent implements OnInit {
     excel.utils.book_append_sheet(wb, ws, 'OrderDetails');
 
     excel.writeFile(wb, 'OrdersDetails.xlsx');
+  }
+
+  search() {
+    if (this.searchText == '') {
+      this.ngOnInit();
+    } else {
+      this.orderData = this.orderData.filter((res) => {
+        return res.cname
+          ?.toLocaleLowerCase()
+          .match(this.searchText?.toLocaleLowerCase());
+      });
+    }
   }
 }

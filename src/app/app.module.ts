@@ -19,6 +19,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { firebaseConfig } from './firebase.config';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { firebaseConfig } from './firebase.config';
     BrowserAnimationsModule,
     AngularFireAuthModule,
     provideAuth(() => getAuth()),
+    NgxPaginationModule,
   ],
   exports: [NgxSpinnerModule],
   providers: [],
