@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Data } from 'src/app/interface/data';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataOperationService } from 'src/app/service/data-operation.service';
 import Swal from 'sweetalert2';
@@ -20,6 +20,7 @@ export class ShowOrderComponent implements OnInit {
   singleOrderIndex: number;
   searchText: string;
   excelFileData: any;
+  @ViewChild('fileForm') fileForm: any;
   constructor(
     private dataOperationService: DataOperationService,
     private formBuilder: FormBuilder,
@@ -152,6 +153,11 @@ export class ShowOrderComponent implements OnInit {
   }
 
   uploadExcel() {
-    console.log('File upload successfully');
+    // console.log('File upload successfully');
+    this.fileForm.reset();
+    this.excelFileData.forEach((element) => {
+      this.dataOperationService.saveData(element);
+      Swal.fire('Success!', 'File Data Uploaded Successfully', 'success');
+    });
   }
 }

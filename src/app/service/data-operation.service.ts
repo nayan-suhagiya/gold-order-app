@@ -18,10 +18,10 @@ export class DataOperationService {
   orders: Observable<any[]>;
 
   constructor(private router: Router, private db: AngularFirestore) {
-    this.dataRef = this.db.collection('data', (ref) =>
-      ref.orderBy('cname', 'asc')
-    );
+    //create collection of add form data
+    this.dataRef = this.db.collection('data');
 
+    //fetch add form data
     this.orders = this.dataRef.snapshotChanges().pipe(
       map((changes) => {
         return changes.map(
@@ -37,6 +37,8 @@ export class DataOperationService {
       })
     );
   }
+
+  //save add form data
   saveData(data: Data) {
     /*
     let orderData = localStorage.getItem('orderData');

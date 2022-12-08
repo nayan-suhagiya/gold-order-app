@@ -12,12 +12,14 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
       <div class="col-sm-4 mt-3 search-box-1">
-        <input
-          type="file"
-          name="importExcel"
-          id="importExcel"
-          (change)="importExcel($event)"
-        />
+        <form #fileForm="ngForm">
+          <input
+            type="file"
+            name="importExcel"
+            id="importExcel"
+            (change)="importExcel($event)"
+          />
+        </form>
         <i class="fa-solid fa-upload" (click)="uploadExcel()"></i>
       </div>
       <div class="float-right">
