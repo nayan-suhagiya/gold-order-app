@@ -19,6 +19,7 @@ export class ShowOrderComponent implements OnInit {
   singleOrderObj: Data = new Data();
   singleOrderIndex: number;
   searchText: string;
+  excelFileData: any;
   constructor(
     private dataOperationService: DataOperationService,
     private formBuilder: FormBuilder,
@@ -133,5 +134,24 @@ export class ShowOrderComponent implements OnInit {
           .match(this.searchText?.toLocaleLowerCase());
       });
     }
+  }
+
+  importExcel(event: any) {
+    let file = event.target.files[0];
+
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+
+    fileReader.onload = (e) => {
+      var wb = excel.read(fileReader.result, { type: 'binary' });
+      var ws = wb.SheetNames;
+
+      this.excelFileData = excel.utils.sheet_to_json(wb.Sheets[ws[0]]);
+      console.log(this.excelFileData);
+    };
+  }
+
+  uploadExcel() {
+    console.log('File upload successfully');
   }
 }

@@ -25,3 +25,24 @@ hr {
   opacity: 0.5;
   color: black;
 }
+
+.set-front {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box-1 i {
+  font-size: 23px;
+  padding: 0px 9px;
+  position: absolute;
+  right: 90px;
+  cursor: pointer;
+}
