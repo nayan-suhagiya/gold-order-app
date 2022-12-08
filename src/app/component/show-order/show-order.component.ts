@@ -154,7 +154,6 @@ export class ShowOrderComponent implements OnInit {
 
   uploadExcel() {
     // console.log('File upload successfully');
-    this.fileForm.reset();
     this.excelFileData.forEach((element) => {
       this.dataOperationService.saveData(element);
       Swal.fire('Success!', 'File Data Uploaded Successfully', 'success');
