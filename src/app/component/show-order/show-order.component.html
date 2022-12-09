@@ -41,7 +41,7 @@
           <tr *ngFor="let data of orderData; let i = index">
             <td>{{ i + 1 }}</td>
             <td>{{ data.jtype }}</td>
-            <td>{{ data.price }}</td>
+            <td>{{ data.price | currency : "INR" }}</td>
             <td>{{ data.weight }}</td>
             <td>{{ data.quantity }}</td>
             <td>{{ data.price * data.quantity | currency : "INR" }}</td>

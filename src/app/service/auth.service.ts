@@ -101,7 +101,7 @@ export class AuthService {
         const user = result.user;
         this.isLoggedIn = true;
         this.router.navigate(['']);
-        localStorage.setItem('google token', JSON.stringify(result.user.email));
+        localStorage.setItem('googletoken', JSON.stringify(result.user.email));
         // ...
       })
       .catch((error) => {
