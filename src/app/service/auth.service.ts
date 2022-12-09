@@ -80,7 +80,7 @@ export class AuthService {
         this.isLoggedIn = false;
         this.router.navigate(['/login']);
         localStorage.removeItem('LoggedInEmail');
-        localStorage.removeItem('google token');
+        localStorage.removeItem('googletoken');
       })
       .catch((error) => {
         this.isLoggedIn = true;
