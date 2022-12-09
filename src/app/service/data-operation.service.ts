@@ -96,7 +96,7 @@ export class DataOperationService {
         this.dataDoc.delete();
         Swal.fire('Success!', 'Order deleted successfully!', 'success');
       } else if (result.isDismissed) {
-        Swal.fire('Eror!', 'Order not deleted!', 'error');
+        // Swal.fire('Eror!', 'Order not deleted!', 'error');
       }
     });
   }
