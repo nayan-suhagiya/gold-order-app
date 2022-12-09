@@ -20,10 +20,27 @@ hr {
 .search-box i {
   font-size: 20px;
   padding: 0px 9px;
-  position: absolute;
-  right: 25px;
+  /* position: absolute;
+  right: 25px; */
   opacity: 0.5;
   color: black;
+}
+
+.upload-file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-file input {
+  background-color: #198752;
+  color: #fff;
+}
+
+.upload-file i {
+  font-size: 25px;
+  padding: 0px 9px;
+  cursor: pointer;
 }
 
 .set-front {
@@ -33,16 +50,8 @@ hr {
   align-items: center;
 }
 
-.search-box-1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-box-1 i {
-  font-size: 23px;
-  padding: 0px 9px;
-  position: absolute;
-  right: 90px;
-  cursor: pointer;
+@media (max-width: 991px) {
+  .set-front {
+    flex-direction: column;
+  }
 }
