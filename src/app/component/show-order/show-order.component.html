@@ -84,11 +84,13 @@
               ></i>
             </td>
             <td>
-              <i
-                class="fa-solid fa-money-check-dollar"
-                style="color: #3e9c35; font-size: 28px"
-                (click)="payment(data)"
-              ></i>
+              <button class="btn" [disabled]="data.payment == 'paid'">
+                <i
+                  class="fa-solid fa-money-check-dollar"
+                  style="color: #3e9c35; font-size: 28px"
+                  routerLink="/payment-order-view/{{ data.id }}"
+                ></i>
+              </button>
             </td>
           </tr>
         </tbody>

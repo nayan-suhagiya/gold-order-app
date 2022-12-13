@@ -164,8 +164,4 @@ export class ShowOrderComponent implements OnInit {
       Swal.fire('Success!', 'File Data Uploaded Successfully', 'success');
     });
   }
-
-  payment(data: Data) {
-    console.log('Payment Works', data.cname);
-  }
 }

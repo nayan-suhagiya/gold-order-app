@@ -20,6 +20,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { firebaseConfig } from './firebase.config';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PaymentOrderViewComponent } from './component/payment-order-view/payment-order-view.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ShowOrderComponent,
     LoginComponent,
     RegisterComponent,
+    PaymentOrderViewComponent,
   ],
   imports: [
     BrowserModule,
