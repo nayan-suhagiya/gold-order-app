@@ -9,4 +9,5 @@ export class Data {
   caddress: string;
   city: string;
   status: string;
+  payment: string;
 }

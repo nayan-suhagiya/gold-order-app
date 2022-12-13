@@ -49,6 +49,7 @@ export class ShowOrderComponent implements OnInit {
       city: [''],
       status: [''],
       id: [''],
+      payment: [''],
     });
   }
 
@@ -64,6 +65,7 @@ export class ShowOrderComponent implements OnInit {
     this.singleOrder.controls['city'].setValue(data.city);
     this.singleOrder.controls['status'].setValue(data.status);
     this.singleOrder.controls['id'].setValue(data.id);
+    this.singleOrder.controls['payment'].setValue(data.payment);
     // this.singleOrderIndex = i;
     // console.log(this.singleOrder);
   }
@@ -80,6 +82,7 @@ export class ShowOrderComponent implements OnInit {
     this.singleOrderObj.city = this.singleOrder.value.city;
     this.singleOrderObj.status = this.singleOrder.value.status;
     this.singleOrderObj.id = this.singleOrder.value.id;
+    this.singleOrderObj.payment = this.singleOrder.value.payment;
     /*
     this.dataOperationService.updateData(
       this.singleOrderObj,
@@ -102,6 +105,7 @@ export class ShowOrderComponent implements OnInit {
       city: this.singleOrderObj.city,
       status: this.singleOrderObj.status,
       id: this.singleOrderObj.id,
+      payment: this.singleOrderObj.payment,
     };
 
     if (this.singleOrderObj.id) {
@@ -159,5 +163,9 @@ export class ShowOrderComponent implements OnInit {
       this.dataOperationService.saveData(element);
       Swal.fire('Success!', 'File Data Uploaded Successfully', 'success');
     });
+  }
+
+  payment(data: Data) {
+    console.log('Payment Works', data.cname);
   }
 }

@@ -147,7 +147,7 @@
               class="alert alert-warning my-2 text-danger"
               *ngIf="caddress.invalid && caddress.touched"
             >
-              Customer address number is not valid !
+              Customer address is not valid !
             </div>
           </div>
           <div class="form-row">
@@ -189,6 +189,28 @@
                 *ngIf="status.invalid && status.touched"
               >
                 Status must be valid !
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="payment"><b>Select Order payment : </b></label>
+              <select
+                id="payment"
+                name="payment"
+                [(ngModel)]="oData.payment"
+                required
+                #payment="ngModel"
+                class="form-control"
+              >
+                <option value="paid">Paid</option>
+                <option value="unpaid">Unpaid</option>
+              </select>
+              <div
+                class="alert alert-warning my-2 text-danger"
+                *ngIf="payment.invalid && payment.touched"
+              >
+                Payment must be valid !
               </div>
             </div>
           </div>

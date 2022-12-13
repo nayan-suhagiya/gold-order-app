@@ -31,10 +31,12 @@
             <th>Net Weight</th>
             <th>Quantity</th>
             <th>Total</th>
-            <th>Status</th>
+            <th>Order Status</th>
+            <th>Payment Status</th>
             <th>Customer Name</th>
             <th>Edit Order</th>
             <th>Delete Order</th>
+            <th>Click To Pay</th>
           </tr>
         </thead>
         <tbody>
@@ -46,24 +48,23 @@
             <td>{{ data.quantity }}</td>
             <td>{{ data.price * data.quantity | currency : "INR" }}</td>
             <td>
-              <button
-                *ngIf="data.status == 'pending'"
-                class="btn btn-outline-warning"
-              >
+              <span *ngIf="data.status == 'pending'" class="text-warning">
                 {{ data.status }}
-              </button>
-              <button
-                *ngIf="data.status == 'confirmed'"
-                class="btn btn-outline-success"
-              >
+              </span>
+              <span *ngIf="data.status == 'confirmed'" class="text-success">
                 {{ data.status }}
-              </button>
-              <button
-                *ngIf="data.status == 'delivered'"
-                class="btn btn-outline-primary"
-              >
+              </span>
+              <span *ngIf="data.status == 'delivered'" class="text-primary">
                 {{ data.status }}
-              </button>
+              </span>
+            </td>
+            <td>
+              <span *ngIf="data.payment == 'paid'" class="text-muted">
+                {{ data.payment }}
+              </span>
+              <span *ngIf="data.payment == 'unpaid'" class="text-danger">
+                {{ data.payment }}
+              </span>
             </td>
             <td>
               {{ data.cname }}
@@ -80,6 +81,13 @@
               <i
                 class="fa-solid fa-trash text-danger"
                 (click)="delete(data, data.id)"
+              ></i>
+            </td>
+            <td>
+              <i
+                class="fa-solid fa-money-check-dollar"
+                style="color: #3e9c35; font-size: 28px"
+                (click)="payment(data)"
               ></i>
             </td>
           </tr>
@@ -256,6 +264,13 @@
                 <option value="delivered">Delivered</option>
               </select>
             </div>
+          </div>
+          <div class="form-group">
+            <label for="payment"><b>Select Order Payment : </b></label>
+            <select id="payment" formControlName="payment" class="form-control">
+              <option value="paid">Paid</option>
+              <option value="unpaid">Unpaid</option>
+            </select>
           </div>
         </form>
       </div>
