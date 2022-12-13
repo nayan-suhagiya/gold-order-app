@@ -70,18 +70,22 @@
               {{ data.cname }}
             </td>
             <td>
-              <i
-                class="fa-solid fa-pen-to-square text-primary"
-                data-toggle="modal"
-                data-target="#exampleModalLong"
-                (click)="edit(data, i)"
-              ></i>
+              <button class="btn">
+                <i
+                  class="fa-solid fa-pen-to-square text-primary"
+                  data-toggle="modal"
+                  data-target="#exampleModalLong"
+                  (click)="edit(data, i)"
+                ></i>
+              </button>
             </td>
             <td>
-              <i
-                class="fa-solid fa-trash text-danger"
-                (click)="delete(data, data.id)"
-              ></i>
+              <button class="btn">
+                <i
+                  class="fa-solid fa-trash text-danger"
+                  (click)="delete(data, data.id)"
+                ></i>
+              </button>
             </td>
             <td>
               <button class="btn" [disabled]="data.payment == 'paid'">
