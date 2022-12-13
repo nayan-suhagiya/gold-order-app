@@ -35,7 +35,10 @@
           <p>{{ data.price }}</p>
           <hr />
           <h5>Payable Amount :</h5>
-          <button class="btn btn-outline-success">
+          <button
+            class="btn btn-outline-success"
+            (click)="initializePayment(data.price * data.quantity)"
+          >
             Pay : {{ data.price * data.quantity | currency : "INR" }}
           </button>
         </div>
