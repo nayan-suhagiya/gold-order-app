@@ -29,9 +29,8 @@ export class PaymentOrderViewComponent implements OnInit {
       });
       this.data = res[0];
       // console.log(this.data);
-
-      this.invokeStripe();
     });
+    this.invokeStripe();
   }
 
   initializePayment(amount: any) {
@@ -49,8 +48,6 @@ export class PaymentOrderViewComponent implements OnInit {
       description: 'Payment With Stripe',
       amount: amount * 100,
       currency: 'INR',
-      height: '600px',
-      width: '600px',
     });
   }
 
