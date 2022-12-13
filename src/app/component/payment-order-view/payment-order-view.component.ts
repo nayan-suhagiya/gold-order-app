@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Data } from 'src/app/interface/data';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -39,7 +40,8 @@ export class PaymentOrderViewComponent implements OnInit {
       locale: 'auto',
       token: function (stripeToken: any) {
         console.log(stripeToken);
-        alert('Stripe token generated!');
+        // alert('Stripe token generated!');
+        Swal.fire('Success!', 'Payment token generated!', 'success');
       },
     });
     paymentHandler.open({
@@ -64,7 +66,8 @@ export class PaymentOrderViewComponent implements OnInit {
           locale: 'auto',
           token: function (stripeToken: any) {
             console.log(stripeToken);
-            alert('Payment has been successfull!');
+            // alert('Payment has been successfull!');
+            Swal.fire('Success!', 'Payment has been successfully', 'success');
           },
         });
       };
