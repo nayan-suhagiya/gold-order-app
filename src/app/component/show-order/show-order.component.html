@@ -1,4 +1,4 @@
-<div class="container text-center my-3 shadow-lg">
+<div class="container rounded text-center mt-3 shadow-lg">
   <div class="row">
     <div class="col-sm-12 set-front">
       <div class="col-sm-8 float-left mt-2 search-box">
@@ -17,8 +17,26 @@
         </button>
       </div>
     </div>
+    <hr />
+    <div class="col-sm-12">
+      <div class="mt-3 mb-2">
+        <label for="importExcel"
+          ><b class="text-danger">Upload Excel File : </b></label
+        >
+        <div class="upload-file">
+          <input
+            type="file"
+            name="importExcel"
+            id="importExcel"
+            #fileValue
+            (change)="importExcel($event)"
+          />
+          <i class="fa-solid fa-upload" (click)="uploadExcel()"></i>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-sm-12">
       <table
         class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl my-2 table-hover"
@@ -99,22 +117,83 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div> -->
+</div>
 
-      <div class="col-sm-12">
-        <div class="mt-3 mb-2">
-          <label for="importExcel"
-            ><b class="text-danger">Upload Excel File : </b></label
-          >
-          <div class="upload-file">
-            <input
-              type="file"
-              name="importExcel"
-              id="importExcel"
-              #fileValue
-              (change)="importExcel($event)"
-            />
-            <i class="fa-solid fa-upload" (click)="uploadExcel()"></i>
-          </div>
+<div class="container mt-2">
+  <div class="row">
+    <div
+      class="col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3"
+      *ngFor="let data of orderData; let i = index"
+    >
+      <div class="card shadow-lg mt-2">
+        <div class="card-body">
+          <h6 class="card-title">Customer : {{ data.cname }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Contact : {{ data.cmobile }}
+          </h6>
+          <p class="card-text">
+            Jtype : <span class="text-muted">{{ data.jtype }}</span>
+          </p>
+          <p class="card-text">
+            Price :
+            <span class="text-muted">{{ data.price | currency : "INR" }}</span>
+          </p>
+          <p class="card-text">
+            Weight : <span class="text-muted">{{ data.weight }}</span>
+          </p>
+          <p class="card-text">
+            Quantity : <span class="text-muted">{{ data.quantity }}</span>
+          </p>
+          <p class="card-text">
+            Total :
+            <span class="text-muted">{{
+              data.price * data.quantity | currency : "INR"
+            }}</span>
+          </p>
+          <p class="card-text">
+            <span>Order Status : </span>
+            <span *ngIf="data.status == 'pending'" class="text-warning">
+              {{ data.status }}
+            </span>
+            <span *ngIf="data.status == 'confirmed'" class="text-success">
+              {{ data.status }}
+            </span>
+            <span *ngIf="data.status == 'delivered'" class="text-primary">
+              {{ data.status }}
+            </span>
+          </p>
+          <p class="card-text">
+            <span>Payment Status : </span>
+            <span *ngIf="data.payment == 'paid'" class="text-muted">
+              {{ data.payment }}
+            </span>
+            <span *ngIf="data.payment == 'unpaid'" class="text-danger">
+              {{ data.payment }}
+            </span>
+          </p>
+          <button class="btn">
+            <i
+              class="fa-solid fa-pen-to-square text-primary"
+              data-toggle="modal"
+              data-target="#exampleModalLong"
+              (click)="edit(data, i)"
+            ></i>
+          </button>
+          <button class="btn">
+            <i
+              class="fa-solid fa-trash text-danger"
+              (click)="delete(data, data.id)"
+            ></i>
+          </button>
+          <button class="btn" [disabled]="data.payment == 'paid'">
+            <i
+              class="fa-solid fa-money-check-dollar"
+              style="color: #3e9c35; font-size: 28px"
+              routerLink="/payment-order-view/{{ data.id }}"
+            ></i>
+          </button>
         </div>
       </div>
     </div>
