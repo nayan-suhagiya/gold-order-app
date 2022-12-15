@@ -21,6 +21,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { firebaseConfig } from './firebase.config';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaymentOrderViewComponent } from './component/payment-order-view/payment-order-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PaymentOrderViewComponent } from './component/payment-order-view/paymen
     AngularFireAuthModule,
     provideAuth(() => getAuth()),
     NgxPaginationModule,
+    HttpClientModule
   ],
   exports: [NgxSpinnerModule],
   providers: [],

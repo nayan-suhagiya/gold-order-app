@@ -1,8 +1,10 @@
-import Swal from 'sweetalert2';
+import { loadStripe } from '@stripe/stripe-js';
+import { HttpClient } from '@angular/common/http';
 import { Data } from 'src/app/interface/data';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataOperationService } from 'src/app/service/data-operation.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-payment-order-view',
@@ -12,11 +14,13 @@ import { DataOperationService } from 'src/app/service/data-operation.service';
 export class PaymentOrderViewComponent implements OnInit {
   id: string;
   data = new Data();
-  paymentHandler: any = null;
+  dataArr: Data[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private dataOperationService: DataOperationService
+    private dataOperationService: DataOperationService,
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -28,47 +32,35 @@ export class PaymentOrderViewComponent implements OnInit {
         return result.id.match(this.id);
       });
       this.data = res[0];
+      this.dataArr.push(this.data);
       // console.log(this.data);
     });
-    this.invokeStripe();
   }
 
-  initializePayment(amount: any) {
-    const paymentHandler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_51MEUprSB4EBQaMcWL4T3jDRIN9KIw12IYMIrn9HvUQpUxDeTRfuOPhDJ8fVeZ9gygzb2pk9ZWpq3R5lfJO4mDsFC00A8gLCxUg',
-      locale: 'auto',
-      token: function (stripeToken: any) {
-        console.log(stripeToken);
-        // alert('Stripe token generated!');
-        Swal.fire('Success!', 'Payment token generated!', 'success');
-      },
-    });
-    paymentHandler.open({
-      name: 'Order Payment',
-      description: 'Payment With Stripe',
-      amount: amount * 100,
-      currency: 'INR',
-    });
-  }
+  initializePayment(): void {
+    this.authService.isLoggedIn = true;
+    this.http
+      .post('http://localhost:4242/checkout', {
+        odata: this.dataArr,
+      })
+      .subscribe(async (res: any) => {
+        console.log(res);
+        localStorage.setItem('OLink', JSON.stringify(res.url));
+        let stripe = await loadStripe(
+          ' pk_test_51MEUprSB4EBQaMcWL4T3jDRIN9KIw12IYMIrn9HvUQpUxDeTRfuOPhDJ8fVeZ9gygzb2pk9ZWpq3R5lfJO4mDsFC00A8gLCxUg'
+        );
 
-  invokeStripe() {
-    if (!window.document.getElementById('stripe-script')) {
-      const script = window.document.createElement('script');
-      script.id = 'stripe-script';
-      script.type = 'text/javascript';
-      script.src = 'https://checkout.stripe.com/checkout.js';
-      script.onload = () => {
-        this.paymentHandler = (<any>window).StripeCheckout.configure({
-          key: 'pk_test_51MEUprSB4EBQaMcWL4T3jDRIN9KIw12IYMIrn9HvUQpUxDeTRfuOPhDJ8fVeZ9gygzb2pk9ZWpq3R5lfJO4mDsFC00A8gLCxUg',
-          locale: 'auto',
-          token: function (stripeToken: any) {
-            console.log(stripeToken);
-            // alert('Payment has been successfull!');
-            Swal.fire('Success!', 'Payment has been successfully', 'success');
-          },
+        stripe?.redirectToCheckout({
+          sessionId: res.id,
         });
-      };
-      window.document.body.appendChild(script);
-    }
+      });
   }
 }
+
+/*
+  publishable key:
+  pk_test_51MEUprSB4EBQaMcWL4T3jDRIN9KIw12IYMIrn9HvUQpUxDeTRfuOPhDJ8fVeZ9gygzb2pk9ZWpq3R5lfJO4mDsFC00A8gLCxUg
+
+  secret key:
+  sk_test_51MEUprSB4EBQaMcWE1ZLkvfXNkvnfFCWntMjALBb13KczmT3ln1PRNBO5gn5IfwlURcumUQBztZUXMwzICfWVdyt00Bl9m1XXf
+*/
