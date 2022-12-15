@@ -65,7 +65,7 @@ export class PaymentOrderViewComponent implements OnInit {
           if (result.isConfirmed) {
             this.clipBoard.copy(res.url);
           } else {
-            Swal.fire('Error!', 'Something Went Wrong!', 'error');
+            Swal.fire('Link not copied!');
           }
         });
         // stripe?.redirectToCheckout({
