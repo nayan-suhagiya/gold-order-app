@@ -22,6 +22,7 @@ import { firebaseConfig } from './firebase.config';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaymentOrderViewComponent } from './component/payment-order-view/payment-order-view.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     provideAuth(() => getAuth()),
     NgxPaginationModule,
-    HttpClientModule
+    HttpClientModule,
+    ClipboardModule,
   ],
   exports: [NgxSpinnerModule],
   providers: [],

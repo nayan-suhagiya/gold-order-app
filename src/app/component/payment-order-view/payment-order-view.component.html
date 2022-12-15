@@ -35,11 +35,31 @@
           <p>{{ data.price }}</p>
           <hr />
           <h5>Payable Amount :</h5>
-          <button class="btn btn-outline-success" (click)="initializePayment()">
+          <!-- <button class="btn btn-outline-success" (click)="initializePayment()">
             Pay : {{ data.price * data.quantity | currency : "INR" }}
-          </button>
+          </button> -->
+          <p>
+            <span
+              ><b>{{ data.price * data.quantity | currency : "INR" }}</b></span
+            >
+            <span
+              class="text-primary text-decoration-underline ml-2"
+              style="cursor: pointer"
+              (click)="initializePayment()"
+              >Generate Payment Link</span
+            >
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ngx-spinner
+  type="square-jelly-box"
+  bdColor="rgb(230, 230, 218)"
+  size="medium"
+  color="rgb(25, 135, 82)"
+>
+  <p class="mt-4 text-success">Loading...</p>
+</ngx-spinner>

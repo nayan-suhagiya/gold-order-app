@@ -113,6 +113,7 @@ export class AuthService {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.warn(errorCode, errorMessage);
+        Swal.fire('Error!', 'Something Went Wrong!', 'error');
         // ...
       });
   }
