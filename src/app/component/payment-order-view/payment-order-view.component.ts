@@ -44,6 +44,9 @@ export class PaymentOrderViewComponent implements OnInit {
 
   initializePayment(): void {
     this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
     this.authService.isLoggedIn = true;
     this.http
       .post('http://localhost:4242/checkout', {
