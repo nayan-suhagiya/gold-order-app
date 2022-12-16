@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { HttpClient } from '@angular/common/http';
 import { Data } from 'src/app/interface/data';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataOperationService } from 'src/app/service/data-operation.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { ClipboardService } from 'ngx-clipboard';
@@ -25,7 +25,8 @@ export class PaymentOrderViewComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private clipBoard: ClipboardService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +47,6 @@ export class PaymentOrderViewComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.spinner.hide();
-      Swal.fire('Sorry for the issue but this will work only local server!');
     }, 2000);
     this.authService.isLoggedIn = true;
     this.http
@@ -68,8 +68,12 @@ export class PaymentOrderViewComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.clipBoard.copy(res.url);
+            this.data.payment = 'paid';
+            this.dataOperationService.updateData(this.data, this.data.id);
+            this.router.navigate(['/']);
           } else {
             Swal.fire('Link not copied!');
+            this.router.navigate(['/']);
           }
         });
         // stripe?.redirectToCheckout({
