@@ -18,27 +18,6 @@ hr {
   opacity: 0.5;
 }
 
-.contain {
-  /* max-width: 600px; */
-  display: flex;
-  justify-content: center;
-}
-
-.contain-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dont-ac {
-  background: white;
-  color: black;
-  border: 1px solid black;
-  padding: 8px;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
 span small a {
   cursor: pointer;
   padding: 5px 0px;
