@@ -7,7 +7,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
 } from 'firebase/auth';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  FacebookAuthProvider,
+} from 'firebase/auth';
 import { signOut } from 'firebase/auth';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
@@ -94,27 +97,41 @@ export class AuthService {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // The signed-in user info.
         const user = result.user;
         this.isLoggedIn = true;
         this.router.navigate(['']);
         localStorage.setItem('googletoken', JSON.stringify(token));
-        // ...
       })
       .catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.customData.email;
-        // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.warn(errorCode, errorMessage);
         Swal.fire('Error!', 'Something Went Wrong!', 'error');
-        // ...
+      });
+  }
+
+  //sign in with facebook
+  facebookSignIn() {
+    const auth = getAuth();
+    var provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        this.isLoggedIn = true;
+        this.router.navigate(['']);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = FacebookAuthProvider.credentialFromError(error);
+        Swal.fire('Error!', 'Something Went Wrong!', 'error');
       });
   }
 }
