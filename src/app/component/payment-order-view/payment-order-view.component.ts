@@ -47,6 +47,7 @@ export class PaymentOrderViewComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.spinner.hide();
+      Swal.fire('Sorry for the issue!This service work with only local!');
     }, 2000);
     this.authService.isLoggedIn = true;
     this.http
